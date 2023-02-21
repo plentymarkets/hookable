@@ -225,9 +225,7 @@ trait Hookable
         $hooks       = $this->boundHooks(__FUNCTION__);
         $params      = compact('key');
         $payload     = false;
-        $destination = function () use ($key) {
-            return call_user_func('parent::__unset', $key);
-        };
+        $destination = fn() => parent::__unset($key);
 
         return $this->pipe($hooks, $payload, $params, $destination);
     }
