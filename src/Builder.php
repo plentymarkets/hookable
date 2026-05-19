@@ -375,31 +375,6 @@ class Builder extends EloquentBuilder
     }
 
     /**
-     * Add an exists clause to the query.
-     *
-     * @param  \Closure $callback
-     * @param  string   $boolean
-     * @param  bool     $not
-     * @return $this
-     */
-    public function whereExists(Closure $callback, $boolean = 'and', $not = false)
-    {
-        $type = $not ? 'NotExists' : 'Exists';
-
-        $builder = $this->newQuery();
-
-        call_user_func($callback, $builder);
-
-        $query = $builder->getQuery();
-
-        $this->query->wheres[] = compact('type', 'query', 'boolean');
-
-        $this->query->mergeBindings($query);
-
-        return $this;
-    }
-
-    /**
      * Add an "order by" clause to the query.
      *
      * @param  string  $column
@@ -540,9 +515,9 @@ class Builder extends EloquentBuilder
     /**
      * Get a new instance of the Hookable query builder.
      *
-     * @return \Sofa\Hookable\Builder
+     * @return static
      */
-    public function newQuery()
+    public function newQuery(): static
     {
         return $this->model->newQueryWithoutScopes();
     }
