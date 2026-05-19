@@ -513,6 +513,19 @@ class Builder extends EloquentBuilder
     }
 
     /**
+     * Get the database connection name.
+     *
+     * Previously provided by Plenty\Modules\Core\Data\Query\Builder.
+     * Added here so all Eloquence/Hookable builders expose getName().
+     *
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->getConnection()->getName();
+    }
+
+    /**
      * Get a new instance of the Hookable query builder.
      *
      * @return static
