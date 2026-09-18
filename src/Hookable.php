@@ -184,7 +184,7 @@ trait Hookable
      *
      * @return mixed
      */
-    public function replicate(array $except = null)
+    public function replicate(?array $except = null)
     {
         $hooks       = $this->boundHooks(__FUNCTION__);
         $params      = ['except' => $except, 'original' => $this];
